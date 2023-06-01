@@ -1,0 +1,32 @@
+.navbar_container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(50, 50, 255);
+    padding: 10px;
+}
+
+.navbar_links_container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar_link {
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar_link:hover {
+    text-decoration: underline;
+}
+
+.navbar_title {
+    text-transform: capitalize;
+    color: white;
+    font-weight: bold;
+}
