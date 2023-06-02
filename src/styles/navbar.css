@@ -1,0 +1,14 @@
+.navbar_container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(50, 50, 255);
+    padding: 10px;
+}
+
+.navbar_title {
+    text-transform: capitalize;
+    color: white;
+    font-weight: bold;
+}
