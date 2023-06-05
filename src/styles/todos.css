@@ -6,27 +6,24 @@
     gap: 30px;
     min-width: 600px;
     color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .todo_container {
-    position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    position: relative;
     background-color: rgb(6, 156, 237);
     width: 100%;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    gap: 20px;
 }
 
 .todo_subcontainer {
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
-    gap: 50px;
+    gap: 20px;
 }
 
 .todo_buttons {
@@ -66,4 +63,8 @@
     text-align: center;
     border-radius: 10px;
 
+}
+
+.todo_input {
+    width: 25px;
 }
