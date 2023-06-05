@@ -15,7 +15,10 @@ model Todo {
   title String
   description String @default("")
   category String @default("")
-  date DateTime @default(now()) @db.Date
+  createdAt DateTime @default(now()) @db.Timestamp()
+  dueHour String @default("23:59")
+  dueDate DateTime @default(now()) @db.Date()
   priority Boolean @default(false)
   completed Boolean @default(false)
 }
+
