@@ -14,10 +14,28 @@ type Todo = {
 
 export async function GET(request: Request) {
   try {
-    const todos = await prisma.todo.findMany();
+    const { searchParams } = new URL(request.url);
+    const attribute = searchParams.get('attribute');
+    const value = searchParams.get('value');
+    let isTrue = (value == "true") ? true : false;
+    let whereClause;
+
+    if(attribute && value) {
+       whereClause = { [attribute as string]: value };
+    }
+
+    if(attribute == "completed" || attribute == "priority") {
+      whereClause = { [attribute as string]: isTrue };
+    }
+
+    const todos = await prisma.todo.findMany({
+      where: whereClause
+    });
+
     return NextResponse.json(todos);
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    return NextResponse.json({ error: 'Internal server error' });
   }
 }
 

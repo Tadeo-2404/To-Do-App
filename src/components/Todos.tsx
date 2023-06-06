@@ -15,26 +15,32 @@ interface Item {
   completed: boolean,
 }
 
-export default function Todos() {
+interface arguments {
+  title: string,
+  attribute: string,
+  value: string
+}
+
+export default function Todos({attribute, value, title}: arguments) {
   const [data, setData] = useState<Item[]>([]);
 
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:3000/api/tasks');
+          const response = await fetch(`http://localhost:3000/api/tasks?attribute=${attribute}&value=${value}`);
           const jsonData = await response.json();
           setData(jsonData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
       };
-  
+   
       fetchData();
     }, []);
 
   return (
     <div>
-      <h1>My Todos</h1>
+      <h1>{title}</h1>
       <div className='todos_container'>
       {data.map((item) => (
         <Task
