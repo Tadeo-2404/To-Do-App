@@ -1,0 +1,8 @@
+-filtar por categoria //
+-filtrar por completado //
+-filtrar por prioridad //
+-filtrar por fecha ///
+
+-cambiar tags por inputs
+-agregar boton de guardar cambios
+-agregar formulario agregar tasks
