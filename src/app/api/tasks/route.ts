@@ -1,6 +1,7 @@
 import prisma from '../../../../prisma/client/index';
 import { NextResponse } from 'next/server';
 
+//objeto todo con todos sus atributos
 type Todo = {
   title: string,
   description?: string,
@@ -12,25 +13,45 @@ type Todo = {
   completed?: boolean,
 }
 
+//metodo GET que obtiene los Task que se filtran en base a sus atributos
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const attribute = searchParams.get('attribute');
-    const value = searchParams.get('value');
-    let isTrue = (value == "true") ? true : false;
-    let whereClause;
+    const { searchParams } = new URL(request.url); //obtener parametros url
+    const attribute = searchParams.get('attribute'); //obtener el atributo de la URL a buscar
+    const value = searchParams.get('value'); //obtener el valor del atributo
+    const limit = searchParams.get('limit'); //obtener el valor del atributo
+    let isTrue = (value == "true") ? true : false; //variable auxiliar para consultar clausula
+    let whereClause; //inicializacion de clausula
+    let todos;
 
+    //clausula de consulta a la base de datos
     if(attribute && value) {
        whereClause = { [attribute as string]: value };
     }
 
+    //obtener los Task completados o marcados como prioridad
     if(attribute == "completed" || attribute == "priority") {
       whereClause = { [attribute as string]: isTrue };
     }
 
-    const todos = await prisma.todo.findMany({
-      where: whereClause
-    });
+    //query de consulta a la base de datos
+    if (limit) {
+      const parsedLimit = parseInt(limit, 10);
+      if (!isNaN(parsedLimit)) {
+        todos = await prisma.todo.findMany({
+          where: whereClause,
+          take: parsedLimit
+        });
+      } else {
+        todos = await prisma.todo.findMany({
+          where: whereClause
+        });
+      }
+    } else {
+      todos = await prisma.todo.findMany({
+        where: whereClause
+      });
+    }
 
     return NextResponse.json(todos);
   } catch (error) {
@@ -39,6 +60,7 @@ export async function GET(request: Request) {
   }
 }
 
+//metodo POST que crea un nuevo task
 export async function POST(request: Request) {
   try {
     const data:Todo = await request.json();

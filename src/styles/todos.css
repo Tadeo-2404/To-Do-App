@@ -69,3 +69,20 @@
 .todo_input {
     width: 25px;
 }
+
+.todo_showMore {
+    font-size: 12px;
+    width: 100px;
+    padding: 5px;
+    background-color: blue;
+    border: none;
+    border-radius: 20px;
+}
+
+.todo_showMore a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}

@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Todos from "../components/Todos";
 import '../styles/home.css'
 
@@ -9,6 +10,7 @@ interface categories {
 
 export default function Home() {
   const [types, setTypes] = useState<categories[]>([]);
+  let counter = 0;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,13 +24,23 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Welcome</h1>
+      <h1>Bienvenido, aqui puedes visualizar tus tareas, para agregar una da click en nuevo</h1>
+      <div className='categories_container'>
+          <h1 className='categories_main_title'>tus categorias</h1>
+          <div className='categories_container_list'>
+            {types.map((item) => (
+              <div className='categories_container_item'>
+                <Link href={`/categorias/${item.category}`}>
+                  <p>{item.category}</p>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
       <div className="container_todos">
-        <Todos attribute={"completed"} value={"false"} title={"TODO"} />
-        <Todos attribute={"priority"} value={"true"} title={"TOP PRIORITY"} />
-        {types.map((item) => (
-          <Todos attribute={"category"} value={item.category} title={item.category.toUpperCase()} />
-        ))}
+        <Todos attribute={"completed"} value={"false"} title={"Pendiente"} limit={3} addBtn={true} />
+        <Todos attribute={"completed"} value={"true"} title={"Completado"} limit={3} addBtn={true} />
+        <Todos attribute={"priority"} value={"true"} title={"Prioridad"} limit={3} addBtn={true} />
       </div>
     </div>
   );
