@@ -1,6 +1,7 @@
 import prisma from '../../../../prisma/client/index';
 import { NextResponse } from 'next/server';
 
+//obtener todas las categorias
 export async function GET(request: Request) {
     try {
       const todos = await prisma.$queryRaw`SELECT DISTINCT "category" FROM "Todo"`

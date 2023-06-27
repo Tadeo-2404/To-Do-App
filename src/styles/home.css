@@ -6,3 +6,36 @@
     max-width: fit-content;
     margin: 30px;
 }
+
+.categories_container {
+    padding: 10px;
+    background-color: rgb(0, 208, 255);
+    border: none;
+    border-radius: 10px;
+}
+
+.categories_main_title {
+    text-transform: capitalize;
+}
+
+.categories_container_list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categories_container_item {
+    display: flex;
+    align-items: center;
+    background-color: blue;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    height: 20px;
+}
+
+.categories_container_item a, p {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
