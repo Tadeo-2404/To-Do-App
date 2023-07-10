@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/layout.css'
+import { NewTask } from '../components/NewTask';
 
 export default function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default function RootLayout({
         {children}
       </main>
       <Footer />
+      <NewTask />
       </body>
     </html>
   );

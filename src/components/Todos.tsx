@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Task } from './Task';
 import Link from 'next/link';
 import '../styles/todos.css'
+import axios from 'axios';
 
 interface Item {
   id: number,
@@ -10,7 +11,6 @@ interface Item {
   description: string,
   category: string,
   createdAt: string,
-  dueHour: string,
   dueDate: string,
   priority: boolean,
   completed: boolean,
@@ -27,19 +27,16 @@ interface arguments {
 export default function Todos({ attribute, value, title, limit, addBtn }: arguments) {
   const [data, setData] = useState<Item[]>([]);
   const [type, setType] = useState("");
-  console.log(limit)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let url = `http://localhost:3000/api/tasks?attribute=${attribute}&value=${value}`;
         if (limit) {
-          console.log('si limite')
           url += `&limit=${limit}`;
         }
-        const response = await fetch(url);
-        const jsonData = await response.json();
-        setData(jsonData);
+        const response = await axios.get(url);
+        setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -63,7 +60,6 @@ export default function Todos({ attribute, value, title, limit, addBtn }: argume
               category={item.category}
               completed={item.completed}
               priority={item.priority}
-              dueHour={item.dueHour}
               dueDate={item.dueDate}
             />
           ))}
