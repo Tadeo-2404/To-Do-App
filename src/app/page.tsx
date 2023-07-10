@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Todos from "../components/Todos";
 import '../styles/home.css'
 import { FormNewTask } from '../components/FormNewTask';
+import axios from 'axios';
 
 interface categories {
   category: string
@@ -11,15 +12,17 @@ interface categories {
 
 export default function Home() {
   const [types, setTypes] = useState<categories[]>([]);
-  let counter = 0;
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch('http://localhost:3000/api/rawQuery');
-      const result = await data.json();
-      setTypes(result);
+      try {
+        const response = await axios.get('http://localhost:3000/api/rawQuery');
+        const result = response.data;
+        setTypes(result);
+      } catch (error) {
+        console.error(error);
+      }
     };
-
     fetchData();
   }, []);
 
@@ -35,7 +38,7 @@ export default function Home() {
             <h1 className='categories_main_title'>tus categorias</h1>
             <div className='categories_container_list'>
               {types.map((item) => (
-                <div className='categories_container_item'>
+                <div className='categories_container_item' key={item.category}>
                   <Link href={`/categorias/${item.category}`}>
                     <p>{item.category}</p>
                   </Link>

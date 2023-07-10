@@ -7,7 +7,6 @@ type Todo = {
   description?: string,
   category?: string,
   createdAt?: string,
-  dueHour?: string,
   dueDate?: string,
   priority?: boolean,
   completed?: boolean,
@@ -64,14 +63,13 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const data:Todo = await request.json();
-    const {title, description, category, createdAt, dueHour, dueDate, priority, completed} = data;
+    const {title, description, category, createdAt, dueDate, priority, completed} = data;
     const todo = await prisma.todo.create({
       data: {
         title,
         description,
         category,
         createdAt,
-        dueHour,
         dueDate,
         priority,
         completed,
@@ -87,7 +85,7 @@ export async function PUT(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
   const data: Todo = await request.json();
-  const { title, description, category, createdAt, dueHour, dueDate, priority, completed } = data;
+  const { title, description, category, createdAt, dueDate, priority, completed } = data;
 
   try {
     if (id) {
@@ -98,7 +96,6 @@ export async function PUT(request: Request) {
           description,
           category,
           createdAt,
-          dueHour,
           dueDate,
           priority,
           completed,

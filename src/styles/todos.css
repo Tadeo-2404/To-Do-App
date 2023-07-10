@@ -11,10 +11,24 @@
     margin-bottom: 20px;
 }
 
+.task_completed {
+    background-color: rgb(169, 169, 169);
+}
+
+.task_completed h1, 
+.task_completed p {
+    text-decoration: line-through;
+    color: black;
+}
+
+.task_uncompleted {
+    background-color: rgb(6, 156, 237);
+}
+
+
 .todo_container {
     display: flex;
     position: relative;
-    background-color: rgb(6, 156, 237);
     width: 100%;
     border-radius: 10px;
     padding: 10px;

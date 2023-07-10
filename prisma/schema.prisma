@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Todo {
-  id Int @id @default(autoincrement())
-  title String
-  description String @default("")
-  category String @default("")
-  createdAt DateTime @default(now()) @db.Timestamp()
-  dueHour String @default("23:59")
-  dueDate DateTime @default(now()) @db.Date()
-  priority Boolean @default(false)
-  completed Boolean @default(false)
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  category    String?   @default("sin categoria")
+  createdAt   String  
+  dueDate     String? 
+  priority    Boolean   @default(false)
+  completed   Boolean   @default(false)
 }
+
 
