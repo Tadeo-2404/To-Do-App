@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Task } from './Task';
 import Link from 'next/link';
 import '../styles/todos.css'
-import axios from 'axios';
+import { obtenerTasks } from '../app/lib/task/api_task';
 
 interface Item {
   id: number,
@@ -26,22 +26,15 @@ interface arguments {
 
 export default function Todos({ attribute, value, title, limit, addBtn }: arguments) {
   const [data, setData] = useState<Item[]>([]);
-  const [type, setType] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        let url = `http://localhost:3000/api/tasks?attribute=${attribute}&value=${value}`;
-        if (limit) {
-          url += `&limit=${limit}`;
-        }
-        const response = await axios.get(url);
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+      const response: any = await obtenerTasks({ attribute, value, limit });
+      console.log(response)
+      setData(response);
+      console.log(data)
     };
-    
+
     fetchData();
   }, []);
 
@@ -50,19 +43,21 @@ export default function Todos({ attribute, value, title, limit, addBtn }: argume
       <div>
         <h1>{title}</h1>
         <div className='todos_container'>
-          {data.map((item) => (
-            <Task
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              createdAt={item.createdAt}
-              category={item.category}
-              completed={item.completed}
-              priority={item.priority}
-              dueDate={item.dueDate}
-            />
-          ))}
+          {
+            data.map((item) => (
+              <Task
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                createdAt={item.createdAt}
+                category={item.category}
+                completed={item.completed}
+                priority={item.priority}
+                dueDate={item.dueDate}
+              />
+            ))
+          }
         </div>
       </div>
       {addBtn && (
@@ -73,5 +68,6 @@ export default function Todos({ attribute, value, title, limit, addBtn }: argume
         </div>
       )}
     </div>
-  )
+  );
 }
+

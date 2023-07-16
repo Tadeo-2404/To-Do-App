@@ -1,10 +1,11 @@
 "use client"
-import { useState } from 'react';
+import Swal from 'sweetalert2'
 import '../styles/formNewTask.css'
-import axios from 'axios'
+import { useState } from 'react';
 import { obtenerFechaActual, obtenerFechaLimite } from '../utils/helpers';
-import moment from 'moment';
+import { crearTask } from '../app/lib/task/api_task';
 
+//interface que contiene el formato del objeto Task
 interface NewTaskData {
   title: string;
   description?: string;
@@ -14,7 +15,19 @@ interface NewTaskData {
   priority: boolean;
   completed: boolean;
 }
-  
+
+//interface que contiene el formato de respuesta
+interface Response {
+    status: number
+}
+
+//funcion que mandar a llamar crearTask que realiza una peticion API
+const crear = async (task: NewTaskData) => {
+    const response : Response = await crearTask(task);
+    return response; //retorna respuesta
+}
+ 
+//componente FormNewTask
 export const FormNewTask = () => {
     const [titulo, setTitulo] = useState("");
     const [fecha, setFecha] = useState("");
@@ -22,6 +35,7 @@ export const FormNewTask = () => {
     const [descripcion, setDescripcion] = useState("");
     const [prioridad, setPrioridad] = useState(false);
 
+    //objeto con los datos del formulario
     const data: NewTaskData = {
         title: titulo,
         description: descripcion || undefined,
@@ -30,22 +44,28 @@ export const FormNewTask = () => {
         dueDate: fecha || obtenerFechaLimite(),
         priority: prioridad,
         completed: false
-      };
-    
+    };
+
+    //handleSubmit cuando se envia el formulario
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(data);
+        const response = await crear(data); //mandamos a llamar la funcion crear y le pasamos el objeto data
 
-        try {
-            const response = await axios.post('http://localhost:3000/api/tasks', data, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                } 
-            });
-            console.log(response);
-        } catch (error) { 
-            console.log(error);
+        //validacion de respuestas
+        if(response.status === 200) {
+            Swal.fire({
+                title: 'Tarea creada',
+                text: 'Se ha creado tu tarea exitosamente',
+                icon: 'success',
+                confirmButtonText: 'De acuerdo'
+            })
+        } else if(response.status > 300){
+            Swal.fire({
+                title: 'Error',
+                text: 'No se ha podido crear tu tarea :(',
+                icon: 'error',
+                confirmButtonText: 'De acuerdo'
+            })
         }
     };
 

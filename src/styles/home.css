@@ -25,19 +25,20 @@
 }
 
 .categories_container_list {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .categories_container_item {
+    flex: 20%; 
     display: flex;
+    justify-content: center;
     align-items: center;
     background-color: blue;
     border: none;
     border-radius: 20px;
-    padding: 10px;
-    height: 20px;
+    width: fit-content;
 }
 
 .categories_container_item a, p {

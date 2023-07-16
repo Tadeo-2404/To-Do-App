@@ -1,0 +1,9 @@
+crear state global para los task
+arreglar checkbox de los completed -
+agregar libreria de notificaciones -
+llenar form con informacion cuando editamos
+eliminar task
+cambiar el estado de un task su atributo completed en base al checkbox
+barra de busqueda
+hacer version movil y de tablet
+cambiar db por firebase
