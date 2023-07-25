@@ -4,6 +4,7 @@ import { Task } from './Task';
 import Link from 'next/link';
 import '../styles/todos.css'
 import { obtenerTasks } from '../app/lib/task/api_task';
+import { useContextValue } from '../context/TaskContext';
 
 interface Item {
   id: number,
@@ -21,22 +22,22 @@ interface arguments {
   attribute: string | null,
   value: string | null,
   limit: number | null,
-  addBtn: boolean
+  addBtn: boolean,
 }
 
 export default function Todos({ attribute, value, title, limit, addBtn }: arguments) {
   const [data, setData] = useState<Item[]>([]);
+  const { render } = useContextValue();
 
+  //fetching data
   useEffect(() => {
     const fetchData = async () => {
       const response: any = await obtenerTasks({ attribute, value, limit });
-      console.log(response)
-      setData(response);
-      console.log(data)
+      setData(response.response);
     };
 
     fetchData();
-  }, []);
+  }, [render]);
 
   return (
     <div>
