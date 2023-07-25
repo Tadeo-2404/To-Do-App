@@ -4,6 +4,7 @@ import '../styles/formNewTask.css'
 import { useState } from 'react';
 import { obtenerFechaActual, obtenerFechaLimite } from '../utils/helpers';
 import { crearTask } from '../app/lib/task/api_task';
+import { useContextValue } from '../context/TaskContext';
 
 //interface que contiene el formato del objeto Task
 interface NewTaskData {
@@ -29,6 +30,7 @@ const crear = async (task: NewTaskData) => {
  
 //componente FormNewTask
 export const FormNewTask = () => {
+    const { render, setRender } = useContextValue();
     const [titulo, setTitulo] = useState("");
     const [fecha, setFecha] = useState("");
     const [categoria, setCategoria] = useState("");
@@ -52,13 +54,14 @@ export const FormNewTask = () => {
         const response = await crear(data); //mandamos a llamar la funcion crear y le pasamos el objeto data
 
         //validacion de respuestas
-        if(response.status === 200) {
+        if(response.status < 300) {
             Swal.fire({
                 title: 'Tarea creada',
                 text: 'Se ha creado tu tarea exitosamente',
                 icon: 'success',
                 confirmButtonText: 'De acuerdo'
             })
+            setRender(render+1);
         } else if(response.status > 300){
             Swal.fire({
                 title: 'Error',

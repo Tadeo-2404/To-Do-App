@@ -1,17 +1,23 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link';
 import Todos from "../components/Todos";
 import '../styles/home.css'
 import { FormNewTask } from '../components/FormNewTask';
 import axios from 'axios';
+import { Context } from '../context/TaskContext';
 
 interface categories {
   category: string
 }
 
+interface ContextValue {
+  render: number;
+}
+
 export default function Home() {
   const [types, setTypes] = useState<categories[]>([]);
+  const { render }: ContextValue = useContext(Context);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,9 +55,9 @@ export default function Home() {
         </div>
 
         <div className="container_todos">
-          <Todos attribute={"completed"} value={"false"} title={"Pendiente"} limit={3} addBtn={true} />
+          <Todos attribute={"completed"} value={"false"} title={"Pendiente"} limit={3} addBtn={true}/>
           <Todos attribute={"completed"} value={"true"} title={"Completado"} limit={3} addBtn={true} />
-          <Todos attribute={"priority"} value={"true"} title={"Prioridad"} limit={3} addBtn={true} />
+          <Todos attribute={"priority"} value={"true"} title={"Prioridad"} limit={3} addBtn={true}/>
         </div>
       </div>
     </div>
