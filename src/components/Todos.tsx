@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { Task } from './Task';
 import Link from 'next/link';
-import '../styles/todos.css'
 import { obtenerTasks } from '../app/lib/task/api_task';
 import { useContextValue } from '../context/TaskContext';
-
+import { CustomButton } from './custom/CustomButton';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 interface Item {
   id: number,
   title: string,
@@ -43,30 +43,34 @@ export default function Todos({ attribute, value, title, limit, addBtn }: argume
     <div>
       <div>
         <h1>{title}</h1>
-        <div className='todos_container'>
-          {
-            data.map((item) => (
-              <Task
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                createdAt={item.createdAt}
-                category={item.category}
-                completed={item.completed}
-                priority={item.priority}
-                dueDate={item.dueDate}
-              />
-            ))
-          }
-        </div>
+        {data.length > 0 ? (
+          <div className='todos_container'>
+            {
+              data.map((item) => (
+                <Task
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  description={item.description}
+                  createdAt={item.createdAt}
+                  category={item.category}
+                  completed={item.completed}
+                  priority={item.priority}
+                  dueDate={item.dueDate}
+                />
+              ))
+            }
+          </div>
+        ) : (
+          <div>
+            sin items
+          </div>
+        )}
       </div>
       {addBtn && (
-        <div className='todo_showMore'>
           <Link href={`/task/${attribute}?value=${value}`}>
-            <p>ver mas</p>
+            <CustomButton text='Ver mas' variant="contained" size="large" endIcon={<ArrowForwardIcon />}/>
           </Link>
-        </div>
       )}
     </div>
   );

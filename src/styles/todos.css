@@ -6,33 +6,32 @@
     gap: 30px;
     min-width: 200px;
     max-width: 400px;
-    color: white;
+    color: var(--blanco);
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .task_completed {
-    background-color: rgb(169, 169, 169);
+    background-color: var(--gris);
 }
 
 .task_completed h1, 
 .task_completed p {
     text-decoration: line-through;
-    color: black;
+    color: var(--negro);
 }
 
 .task_uncompleted {
-    background-color: rgb(6, 156, 237);
+    background-color: var(--fondo_task);
 }
 
 
 .todo_container {
     display: flex;
-    position: relative;
     width: 100%;
     border-radius: 10px;
     padding: 10px;
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 20px 0px var(--negro);
     gap: 20px;
 }
 
@@ -42,11 +41,24 @@
 }
 
 .todo_buttons {
-    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.todo_button {
+    outline: none;
+    border: none;
+    width: 100%;
     display: flex;
-    gap: 20px;
-    top: 30px;
-    right: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10%;
+    color: white;
+}
+
+.todo_button:hover {
+    cursor: pointer;
 }
 
 .todo_title {
@@ -59,44 +71,6 @@
     font-size: 15px;
 }
 
-.todo_icon_delete {
-    color: white;
-    background-color: red;
-    padding: 5px;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    border-radius: 10px;
-}
-
-.todo_icon_edit {
-    color: white;
-    background-color: blue;
-    padding: 5px;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    border-radius: 10px;
-
-}
-
 .todo_input {
     width: 25px;
-}
-
-.todo_showMore {
-    font-size: 12px;
-    width: 100px;
-    padding: 5px;
-    background-color: blue;
-    border: none;
-    border-radius: 20px;
-}
-
-.todo_showMore a {
-    text-decoration: none;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-align: center;
 }

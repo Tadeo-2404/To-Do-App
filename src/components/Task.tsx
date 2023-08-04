@@ -1,9 +1,10 @@
-import '../styles/todos.css';
 import { useState } from 'react';
-import { RiDeleteBin6Line, RiEditFill } from 'react-icons/ri';
 import { actualizarTask, eliminarTask } from '../app/lib/task/api_task';
 import Swal from 'sweetalert2'
 import { useContextValue } from '../context/TaskContext';
+import { CustomButton } from './custom/CustomButton';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 //interface para Item
 interface Item {
@@ -101,13 +102,16 @@ export const Task = ({ id, title, description, completed, priority, dueDate, cat
         <div>
           <h1 className='todo_title'>{title}</h1>
           <div className='todo_subcontainer'>
-            <p>{description}</p>
             <p>{dateWithoutTZ[0]} - {dateWithoutTZ[1]}</p>
           </div>
         </div>
         <div className='todo_buttons'>
-          <div className='todo_icon_edit'><RiEditFill /></div>
-          <div onClick={() => eliminar(id, title)}><RiDeleteBin6Line className='todo_icon_delete' /></div>
+          <div>
+            <CustomButton text='editar' variant="contained" size='small' endIcon={<EditIcon/>}/>
+          </div>
+          <div onClick={() => eliminar(id, title)}>
+            <CustomButton text='eliminar' variant="contained" color='error' size='small' endIcon={<DeleteIcon/>}/>
+          </div>
         </div>
       </div>
     </div>

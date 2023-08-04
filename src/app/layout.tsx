@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import '../styles/layout.css'
+import '../styles/main.css'
 import { NewTask } from '../components/NewTask';
 import ContextProvider from '../context/TaskContext';
 
