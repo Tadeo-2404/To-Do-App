@@ -1,49 +1,6 @@
-.home_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.container_todos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: space-between;
-    gap: 50px;
-    max-width: fit-content;
-    margin: 30px;
-}
-
 .categories_container {
-    padding: 10px;
-    background-color: rgb(0, 208, 255);
+    background-color: var(--fondo_categorias);
     border: none;
     border-radius: 10px;
 }
 
-.categories_main_title {
-    text-transform: capitalize;
-}
-
-.categories_container_list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.categories_container_item {
-    flex: 20%; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: blue;
-    border: none;
-    border-radius: 20px;
-    width: fit-content;
-}
-
-.categories_container_item a, p {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    text-align: center;
-}

@@ -2,12 +2,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: rgb(50, 50, 255);
+    background-color: var(--fondo_NavBar);
     padding: 10px;
 }
 
 .navbar_title {
     text-transform: capitalize;
-    color: white;
+    color: var(--blanco);
     font-weight: bold;
 }

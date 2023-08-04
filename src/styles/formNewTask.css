@@ -4,9 +4,8 @@
 
 .form_fieldset {
     padding: 10px;
-    background-color: rgb(6, 156, 237);
-    background-color: rgb(6, 156, 237);
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    background-color: var(--fondo_form);
+    box-shadow: 0px 0px 20px 0px var(--negro);
     border: none;
     width: 100%;
 }
@@ -15,7 +14,7 @@
     text-transform: uppercase;
     font-weight: bold;
     font-size: 16px;
-    color: white;
+    color: var(--blanco);
 }
 
 .section_container {
@@ -26,6 +25,13 @@
     grid-template-areas:
         'titulo      categoria .'
         'descripcion fecha prioridad';
+}
+
+.section_container_mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .input_titulo_container {
@@ -46,7 +52,7 @@
 
 .input_prioridad_container {
     grid-area: prioridad;
-    color: white;
+    color: var(--blanco);
 }
 
 .input_titulo_container input,
@@ -58,36 +64,6 @@
   border: none;
   padding: 5px;
   background-color: transparent;
-  border-bottom: 1px solid white;
-  color: white;
+  border-bottom: 1px solid var(--blanco);
+  color: var(--blanco);
 }
-
-.input_titulo_container input::placeholder,
-.input_categoria_container input::placeholder,
-.input_descripcion_container input::placeholder,
-.input_fecha_container input::placeholder,
-.input_prioridad_container input::placeholder {
-  color: white;
-}
-
-.input_titulo_container input:focus,
-.input_categoria_container input:focus
-.input_descripcion_container input:focus,
-.input_fecha_container input:focus,
-.input_prioridad_container input:focus {
-  border-bottom-color: blue;
-  border-bottom-width: 2px;
-}
-
-.input_form_submit {
-    font-size: 12px;
-    width: 100px;
-    padding: 5px;
-    background-color: blue;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
